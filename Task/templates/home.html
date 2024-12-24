@@ -1,0 +1,29 @@
+
+{% include 'main.html' %}
+
+{% block content %}
+<br>
+<div>
+    <table class="table table-striped">
+        <tr>
+            <td>Sroll</td>
+            <td>Sname</td>
+            <td>Course</td>
+            <td>Adress</td>
+        </tr>
+      
+    {% for i in data %}
+
+    <div >
+        <tr>
+            <td>{{ i.roll_no }}</td>
+            <td><a href="{% url 'details' i.id %}"> {{ i.name }}</a></td>
+            <td>{{ i.course }}</td>
+            <td>{{ i.address }}</td>
+        </tr>  
+            
+    </div> 
+
+    {% endfor %}
+
+{% endblock content %}            

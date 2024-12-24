@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+    <table class="table table-striped">
+        <tr>
+            <td>Sroll</td>
+            <td>Sname</td>
+            <td>Course</td>
+            <td>Adress</td>
+        </tr>
+    
+        <tr>
+            <td>{{ data.roll_no }}</td>
+            <td>{{ data.name }}</a></td>
+            <td>{{ data.course }}</td>
+            <td>{{ data.address }}</td>
+        </tr>  
+        </table>
+        <button type="button" class="btn btn-success"><a href="{% url 'update' data.id %}">Edit</a></button>
+        <button type="button" class="btn btn-danger"><a href="{% url 'delete' data.id %}">Delete</a></button>
+    
+
+
+{% endblock content %}
