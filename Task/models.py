@@ -9,4 +9,9 @@ class crud(models.Model):
     address = models.TextField()
 
     
+class Contact(models.Model):
+    name=models.CharField(max_length=255)
+    email=models.CharField(max_length=255)
+    phone=models.IntegerField()
+    message=models.TextField()
 

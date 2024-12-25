@@ -1,5 +1,5 @@
 from django.shortcuts import render,redirect
-from .models import crud
+from .models import crud,Contact
 
 # Create your views here.
 
@@ -31,8 +31,6 @@ def home(request):
 def about(request):
     return render(request,'about.html')
 
-def contact(request):
-    return render(request,'contact.html')
 
 def details(request,pk):
     data=crud.objects.get(id=pk)
@@ -76,3 +74,18 @@ def delete(request,pk):
     }
 
     return render(request,'delete.html',context)
+
+def contact(request):
+    if request.method == 'POST':
+        name=request.POST.get('name')
+        email=request.POST.get('email')
+        phone=request.POST.get('phone')
+        message=request.POST.get('message')
+
+        Contact.objects.create(name=name, email=email, phone=phone, message=message)
+        return redirect('con_msg')
+    
+    return render(request,'contact.html')
+
+def con_msg(request):
+    return render(request,'con_msg.html')
