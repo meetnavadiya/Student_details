@@ -1,32 +1,38 @@
 from django.shortcuts import render,redirect
 from .models import crud,Contact
+from django.db.models import Q
+
 
 # Create your views here.
 
 def home(request):
-    # print(request.__dict__)
+    query = request.GET.get('q', '')
 
+    if query:
+        data = crud.objects.filter(name__icontains=query)
+    else:
+        data=crud.objects.all()
+    
+    context={
+        'data':data
+    }
+    return render(request,'home.html', context)
+ 
+def add(request):
     if request.method == 'POST':
-        name=request.POST.get('name')
         roll_no=request.POST.get('roll')
+        name=request.POST.get('name')
         course=request.POST.get('course')
         address=request.POST.get('address')
-       
         crud.objects.create(
-            sname=name,
-            sroll=roll_no,
-            scourse=course,
-            saddress=address
+            roll_no=roll_no,
+            name=name,
+            course=course,
+            address=address
         )
         return redirect('home')
-    
-    tasks=crud.objects.all()
+    return render(request,'add.html')
 
-    context={
-        'data':tasks
-    }
-
-    return render(request,'home.html',context)
 
 def about(request):
     return render(request,'about.html')
